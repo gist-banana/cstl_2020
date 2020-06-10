@@ -13,9 +13,6 @@ producer = KafkaProducer(bootstrap_servers=['']) # INPUT KAFKA BOOTSTRAP_SERVERS
 ### - END
 topicName = 'cstl'
 
-# Network interface to be monoitored
-# define a function to output perf output
-
 def transmit_kafka():
     p = sub.Popen(('tcpdump','-i',INTERFACE_NAME,'-l'), stdout=sub.PIPE)
 
@@ -24,10 +21,6 @@ def transmit_kafka():
         if (content.find(IP_ADDRESS)) != -1 and content.find('ICMP') != -1 :
             print(content)
             producer.send(topicName, content)
-
-        # producer.send(topicName, content)
-
-        # INPUT YOUR CODE HERE - END
 
 # transmit_kafka()
 
